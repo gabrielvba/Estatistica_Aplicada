@@ -60,10 +60,10 @@ ggcorr(carros, label = TRUE, label_round = 2, label_size = 4, size = 3, hjust = 
   ggtitle("Correlation Heatmap") +
   theme(plot.title = element_text(hjust = 0.5))
 
-#le novamente os dados pois se tratar factor como numerico o modelo_carro se ajusta de forma diferente 
+#le novamente os dados pois se tratar factor como numerico o modelo se ajusta de forma diferente 
 carros <- read.csv(("~/carros_honda.csv"), header=TRUE, sep=";",encoding="UTF-8")
 
-#regressao simples 1 preco X ano
+#regressao simples 1: preco X ano
 summary(lm(carros$preco ~ carros$ano ))
 
 plot(carros$preco,carros$ano)
@@ -76,7 +76,7 @@ carros %>%
   labs(x = "Ano", y = "Preco", title = "ano X Valor") +
   theme(plot.title = element_text(hjust = 0.5))
 
-#regressao simples 2 preco X kms
+#regressao simples 2: preco X kms
 summary(lm(carros$preco ~ carros$kms ))
 
 carros %>%
@@ -89,7 +89,7 @@ carros %>%
 
 plot(carros$preco,carros$kms)
 
-#regressao simples 3 preco X modelo_carro do carro
+#regressao simples 3: preco X modelo_carro
 summary(lm(carros$preco ~ carros$modelo_carro ))
 
 plot(carros$preco,carros$modelo_carro)
@@ -109,20 +109,20 @@ boxplot(carros$preco ~ carros$modelo_carro,
         col=c("yellow","orange","red"))
 
 
-#regressao multipla 1 preco X ano + kms
+#regressao multipla 1: preco X ano + kms
 summary(lm(carros$preco ~ carros$ano + carros$kms ))
 
 #plot(carros$preco,carros$ano,carros$kms)
 
 scatter3d(carros$preco, carros$kms, carros$ano)
 
-#regressao multipla 2 preco X ano + modelo_carro
+#regressao multipla 2: preco X ano + modelo_carro
 summary(lm(carros$preco ~ carros$ano + carros$modelo_carro ))
 
 
 
 
-#melhor modelo_carro
+#regressao multipla 3: Melhor Modelo - preco X ano + Kms + modelo_carro
 linear_model = lm(carros$preco ~ carros$ano + carros$kms  + carros$modelo_carro)
 
 summary(linear_model)
